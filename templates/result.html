@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Workout Plan</title>
+
+<link rel="stylesheet" href="/static/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar">
+FitBuddy AI Trainer
+</div>
+
+<div class="container">
+<div class="plan-card">
+<h2>Your Workout Plan</h2>
+
+<p><b>User:</b> {{ name }}</p>
+
+<div class="plan-container">
+
+{% for day in plan.split("Day")[1:] %}
+
+<div class="plan-card">
+
+<h3>Day {{ loop.index }}</h3>
+
+<div class="exercise">
+
+{% set parts = day.split("Main Workout:") %}
+
+<p><b>Warm-up:</b> {{ parts[0].replace("Warm-up:", "") }}</p>
+
+{% if parts|length > 1 %}
+<p><b>Main Workout:</b> {{ parts[1].split("Cooldown:")[0] }}</p>
+{% endif %}
+
+{% if "Cooldown:" in day %}
+<p><b>Cooldown:</b> {{ day.split("Cooldown:")[1] }}</p>
+{% endif %}
+
+</div>
+</div>
+
+{% endfor %}
+
+</div></div>
+
+<h3>Nutrition Tip</h3>
+
+<div class="tip-card">
+{{ tip }}
+</div>
+
+<div class="feedback-box">
+
+<h3>Give Feedback</h3>
+
+<form action="/submit-feedback" method="post">
+
+<textarea name="feedback" rows="3" placeholder="Example: add more cardio or yoga"></textarea>
+
+<br><br>
+
+<button type="submit">Submit Feedback</button>
+
+</form>
+
+</div>
+
+<a class="back" href="/">← Generate Another Plan</a>
+
+</div>
+
+</body>
+
+</html>
