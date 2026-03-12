@@ -54,3 +54,7 @@ uvicorn app.main:app --reload
 3. Open browser
 
 http://127.0.0.1:8000
+
+4.Check this out
+
+https://fit-buddy--anamika98.replit.app
